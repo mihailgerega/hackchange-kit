@@ -21,29 +21,35 @@
 
 Нужны Claude Code (CLI или вкладка Code в десктопном приложении), `git`, Node 22+ (для `npx`-серверов MCP и OpenSpec), Go 1.25+, Docker.
 
-### Локально (только вы)
+### Для всей команды (рекомендуется)
+
+В папке репозитория проекта (один раз, любой участник):
 
 ```bash
-claude plugin marketplace add /home/misha/hackchange-kit
-```
-```bash
-claude plugin install hackkit@hackchange
-```
-
-В десктопном приложении: вкладка Code → **+** рядом с полем ввода → **Add plugins** → добавить маркетплейс по пути → установить `hackkit`.
-
-Плагин из локального маркетплейса читается прямо с диска: правки в `~/hackchange-kit` применяются при следующем старте сессии или после `/reload-plugins`.
-
-### Для всей команды (после публикации на GitHub)
-
-```bash
-claude plugin marketplace add <owner>/hackchange-kit --scope project
+claude plugin marketplace add mihailgerega/hackchange-kit --scope project
 ```
 ```bash
 claude plugin install hackkit@hackchange --scope project
 ```
 
-Команды выполняются в репозитории проекта. Они записывают `.claude/settings.json`; его нужно закоммитить, и тогда каждый участник получит кит, когда откроет проект. Поле `version` в плагине не задано специально: команда получает новые коммиты кита без ручного повышения версии (`/plugin marketplace update hackchange`).
+Команды записывают `.claude/settings.json`; его нужно закоммитить. Остальные участники клонируют проект, открывают папку в Claude Code, доверяют ей (trust) и соглашаются установить маркетплейс `hackchange` и плагин `hackkit`. Если запрос не появился — те же две команды в папке проекта.
+
+Поле `version` в плагине не задано специально: команда получает новые коммиты кита без ручного повышения версии (`/plugin marketplace update hackchange`).
+
+### Только для себя
+
+```bash
+claude plugin marketplace add mihailgerega/hackchange-kit
+```
+```bash
+claude plugin install hackkit@hackchange
+```
+
+В десктопном приложении: вкладка Code → **+** рядом с полем ввода → **Add plugins** → добавить маркетплейс `mihailgerega/hackchange-kit` → установить `hackkit`.
+
+### Разработка самого кита
+
+Подключите локальный клон (`claude plugin marketplace add <путь к клону>`): плагин читается прямо с диска, правки применяются при следующем старте сессии или после `/reload-plugins`.
 
 ### Языковые серверы для LSP
 

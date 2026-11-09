@@ -91,10 +91,10 @@ Run `make check` and `docker compose config -q` (with no `.env` present). Both m
 
 ## 8. Share the plugin with the team (ask first)
 
-If the kit is on GitHub, register it for everyone who opens this repo:
+Register the kit for everyone who opens this repo (skip if `.claude/settings.json` already lists `hackkit@hackchange`):
 
 ```bash
-claude plugin marketplace add <owner>/hackchange-kit --scope project
+claude plugin marketplace add mihailgerega/hackchange-kit --scope project
 claude plugin install hackkit@hackchange --scope project
 ```
 
