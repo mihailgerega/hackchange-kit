@@ -1,0 +1,14 @@
+{
+  "name": "hackchange",
+  "description": "Claude Code kit for the Hack&Change 2026 hackathon (Avito AI-buddy case)",
+  "owner": {
+    "name": "Mikhail Gerega"
+  },
+  "plugins": [
+    {
+      "name": "hackkit",
+      "source": "./plugins/hackkit",
+      "description": "OpenSpec + TDD hackathon workflow, Go/React stack skills, MCP and LLM-agent patterns, reviewers, coverage gate, demo, deck, mock jury"
+    }
+  ]
+}

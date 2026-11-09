@@ -1,0 +1,33 @@
+# golangci-lint v2 config. Avito reviewers expect a linter config in the repo (tech-internship 2025–2026).
+version: "2"
+
+run:
+  timeout: 3m
+
+linters:
+  default: standard # errcheck, govet, ineffassign, staticcheck, unused
+  enable:
+    - bodyclose
+    - errorlint # errors.Is/As instead of == and type switches on wrapped errors
+    - gosec
+    - misspell
+    - noctx # HTTP requests carry a context
+    - revive
+    - unconvert
+  settings:
+    revive:
+      rules:
+        - name: exported
+          disabled: true # hackathon: no doc comment on every export
+  exclusions:
+    presets:
+      - comments
+      - std-error-handling
+    rules:
+      - path: _test\.go
+        linters: [gosec, noctx]
+
+formatters:
+  enable:
+    - gofmt
+    - goimports

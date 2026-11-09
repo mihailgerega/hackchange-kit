@@ -1,0 +1,193 @@
+# Onboarding checklist seed for the AI-buddy prototype.
+# Source: the Avito intern checklist linked in the Hack&Change 2026 case (sheets "Материалы для всех"
+# and "Чек-лист Backend"), retrieved 2026-11-09. Item wording is shortened; details stay in the source.
+# This is the plan structure only. Intern progress, people and requests in the demo must be synthetic.
+#
+# audience: intern | buddy | all      track: common | backend
+# kind: org | access | learn | tool | event | survey   (lets the buddy pick a service or a knowledge answer)
+
+source:
+  name: "Чек-лист стажёра Авито (материалы кейса Hack&Change 2026)"
+  url: "https://docs.google.com/spreadsheets/d/1qKFqOzfSZ2jEz57jBSmq7rukDXi_tRfWohgemViceV0/edit?usp=sharing"
+  retrieved: "2026-11-09"
+
+periods:
+  - { id: week1, title: "1 неделя", order: 1 }
+  - { id: week2, title: "2 неделя", order: 2 }
+  - { id: month1, title: "1 месяц", order: 3 }
+  - { id: month2, title: "2 месяц", order: 4 }
+  - { id: month3, title: "3 месяц", order: 5 }
+  - { id: after3m, title: "После 3 месяцев", order: 6 }
+
+items:
+  # ---- Sheet "Материалы для всех" ----
+  - id: org-setup
+    track: common
+    period: week1
+    audience: buddy
+    kind: org
+    title: "Организационные моменты"
+    steps:
+      - "Добавить стажёра во все нужные чаты и каналы, в том числе закрытые"
+      - "Проверить, что стажёр запросил доступы к инструментам и пространствам (Confluence, Jira и т. д.)"
+      - "Назначить регулярные 1:1 о работе команды, инструментах и задачах"
+      - "Обсудить цели и план на адаптацию, критерии успешной стажировки и OKR команды"
+  - id: mentor-guide
+    track: common
+    period: week1
+    audience: buddy
+    kind: org
+    title: "Запросить у куратора стажировки методичку наставника"
+  - id: meet-team
+    track: common
+    period: week1
+    audience: intern
+    kind: org
+    title: "Познакомиться с командой"
+  - id: work-with-mentor
+    track: common
+    period: week1
+    audience: intern
+    kind: org
+    title: "Работа с наставником"
+    steps:
+      - "Попросить добавить себя во все ключевые каналы и чаты"
+      - "Обсудить с наставником прошедшие встречи и задать вопросы"
+      - "Завести конспект встреч с наставником: о компании, обратная связь по работе"
+  - id: team-space-access
+    track: common
+    period: week1
+    audience: intern
+    kind: access
+    title: "Запросить доступ в пространство своего кластера и/или команды и изучить его"
+  - id: progress-tool
+    track: common
+    period: week2
+    audience: buddy
+    kind: org
+    title: "Запросить у куратора инструмент отслеживания прогресса стажёра и внести цели, задачи и ожидания"
+  - id: team-docs
+    track: common
+    period: week2
+    audience: intern
+    kind: learn
+    title: "Изучить документы и мануалы команды, вертикали или кластера от бадди или руководителя"
+  - id: data-protection
+    track: common
+    period: month1
+    audience: intern
+    kind: learn
+    title: "Изучить основы защиты персональных данных и инструкции Авито"
+    steps:
+      - "Лендинг «Защита данных»"
+      - "Памятка по раскрытию информации"
+      - "Политика по работе с конфиденциальной информацией"
+  - id: university-practice
+    track: common
+    period: month2
+    audience: intern
+    kind: learn
+    title: "Изучить памятку, как закрывать практику и писать учебные работы по Авито"
+  - id: equator-prep
+    track: common
+    period: after3m
+    audience: intern
+    kind: event
+    title: "Подготовиться к экваторной встрече"
+    steps:
+      - "Сходить на мастер-классы (приглашения в календаре)"
+      - "Посмотреть запись мастер-класса о презентациях"
+      - "Пройти курсы по выступлениям и коммуникации"
+  - id: equator-intern
+    track: common
+    period: after3m
+    audience: intern
+    kind: event
+    title: "Экваторная встреча"
+    steps:
+      - "Оформить презентацию по заданной структуре и подготовить речь"
+      - "Согласовать презентацию с куратором стажировки и бадди или руководителем"
+      - "При необходимости попросить провести репетицию"
+      - "Выступить с промежуточными результатами"
+      - "Прийти на встречу с подведением итогов"
+  - id: midterm-1on1
+    track: common
+    period: after3m
+    audience: buddy
+    kind: org
+    title: "На 1:1 обсудить промежуточные итоги и дать обратную связь по целям"
+  - id: equator-buddy
+    track: common
+    period: after3m
+    audience: buddy
+    kind: event
+    title: "Экваторная встреча (для бадди)"
+    steps:
+      - "Сходить на бриф для бадди и руководителей"
+      - "Проверить презентацию стажёра: задачи и цели отражены корректно"
+      - "Провести 15-минутную репетицию, если стажёр попросит"
+      - "Подготовить напутственное слово"
+      - "Прийти на экваторную встречу стажёра"
+  - id: graduation
+    track: common
+    period: after3m
+    audience: all
+    kind: event
+    title: "Выпускной"
+  - id: survey-intern
+    track: common
+    period: after3m
+    audience: intern
+    kind: survey
+    title: "Пройти опрос о том, как прошла стажировка"
+  - id: survey-buddy
+    track: common
+    period: after3m
+    audience: buddy
+    kind: survey
+    title: "Пройти опрос о том, как прошла стажировка"
+
+  # ---- Sheet "Чек-лист Backend" ----
+  - { id: be-dev-principles, track: backend, period: week1, audience: intern, kind: learn, title: "Изучить принципы разработки Авито" }
+  - { id: be-avito-numbers, track: backend, period: week1, audience: intern, kind: learn, title: "Изучить «Авито в цифрах»" }
+  - { id: be-avito-cli, track: backend, period: week1, audience: intern, kind: tool, title: "Настроить avito-cli" }
+  - { id: be-stash-keys, track: backend, period: week1, audience: intern, kind: access, title: "Добавить ключи в stash" }
+  - { id: be-tech-dep, track: backend, period: week1, audience: intern, kind: access, title: "Попросить руководителя или наставника добавить в канал Tech-dep" }
+  - { id: be-sentry, track: backend, period: week1, audience: intern, kind: tool, title: "Разобраться с Sentry и уметь рассказать о нём" }
+  - { id: be-training-platform, track: backend, period: week1, audience: intern, kind: learn, title: "Прорешать задачи на учебной платформе, чтобы познакомиться с инструментами" }
+  - { id: be-data-storage, track: backend, period: week2, audience: intern, kind: learn, title: "Изучить документацию по работе с базами данных («Данные и хранилища Авито»)" }
+  - { id: be-observer, track: backend, period: week2, audience: intern, kind: tool, title: "Разобраться с Observer и уметь рассказать о нём" }
+  - { id: be-paas, track: backend, period: week2, audience: intern, kind: tool, title: "Изучить PaaS: дашборд и канал новостей" }
+  - { id: be-go-docs, track: backend, period: week2, audience: intern, kind: learn, title: "Изучить документацию по Go" }
+  - { id: be-profiles, track: backend, period: week2, audience: intern, kind: learn, title: "Изучить профили инженеров" }
+  - { id: be-agile, track: backend, period: month1, audience: intern, kind: learn, title: "Пройти курс «Agile в Авито» и разобраться в Agile и Scrum" }
+  - { id: be-microservices, track: backend, period: month1, audience: intern, kind: learn, title: "Пройти курс «Микросервисная архитектура в Авито»" }
+  - { id: be-sniffer-lens, track: backend, period: month1, audience: intern, kind: tool, title: "Установить сниффер запросов (Bruno или Charles) и Lens для Kubernetes" }
+  - { id: be-spt, track: backend, period: month1, audience: intern, kind: learn, title: "Изучить SPT (работа с обращениями пользователей)" }
+  - { id: be-zbp, track: backend, period: month1, audience: intern, kind: learn, title: "Изучить Zero Bug Policy" }
+  - { id: be-grafana, track: backend, period: month1, audience: intern, kind: tool, title: "Разобраться с Grafana и уметь рассказать о ней" }
+  - { id: be-api, track: backend, period: month1, audience: intern, kind: learn, title: "Изучить информацию про API" }
+  - { id: be-effective-go, track: backend, period: month1, audience: intern, kind: learn, title: "Изучить Effective Go" }
+  - { id: be-tech-platform, track: backend, period: month2, audience: intern, kind: learn, title: "Изучить демо Tech Platform" }
+  - { id: be-load-testing, track: backend, period: month2, audience: intern, kind: learn, title: "Изучить документацию по нагрузочному тестированию" }
+  - { id: be-infomodel, track: backend, period: month2, audience: intern, kind: learn, title: "Изучить инфомодель" }
+  - { id: be-redash, track: backend, period: month3, audience: intern, kind: tool, title: "Разобраться с Redash и уметь рассказать о нём" }
+  - { id: be-patterns-course, track: backend, period: month3, audience: intern, kind: learn, title: "Пройти курс «Паттерны и практики написания кода»" }
+  - { id: be-communities, track: backend, period: month3, audience: intern, kind: org, title: "Найти подходящее сообщество в Центре сообществ Авито" }
+  - { id: be-shatality, track: backend, period: month3, audience: intern, kind: learn, title: "Познакомиться с процессом «Шаталити» (планирование плановых работ без пересечений между сервисами)" }
+  - { id: be-book-go, track: backend, period: after3m, audience: intern, kind: learn, title: "Книга: Донован, Керниган «Язык программирования Go»" }
+  - { id: be-book-microservices, track: backend, period: after3m, audience: intern, kind: learn, title: "Книга: Ричардсон «Микросервисы. Паттерны разработки и рефакторинга»" }
+  - { id: be-book-algorithms, track: backend, period: after3m, audience: intern, kind: learn, title: "Книга: Бхаргава «Грокаем алгоритмы»" }
+  - { id: be-book-ddia, track: backend, period: after3m, audience: intern, kind: learn, title: "Книга: Клеппман «Высоконагруженные приложения»" }
+  - id: be-books-director
+    track: backend
+    period: after3m
+    audience: intern
+    kind: learn
+    title: "Рекомендации директора центра разработки"
+    steps:
+      - "Уэзеролл, Таненбаум «Компьютерные системы и сети» (2 книги)"
+      - "Кормен и др. «Алгоритмы: построение и анализ»"
+      - "Макконнелл «Совершенный код»"
+      - "Мартин «Чистый код»"
+      - "Хант, Томас «Программист-прагматик»"

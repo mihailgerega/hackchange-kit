@@ -1,0 +1,21 @@
+name: ci
+on:
+  push: { branches: [main] }
+  pull_request:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-go@v6
+        with: { go-version-file: backend/go.mod, cache-dependency-path: backend/go.sum }
+      - uses: actions/setup-node@v5
+        with: { node-version: 24, cache: npm, cache-dependency-path: frontend/package-lock.json }
+      - uses: golangci/golangci-lint-action@v8
+        with: { version: latest, install-only: true } # make lint runs it with backend/.golangci.yml
+      - run: npm ci
+        working-directory: frontend
+      - run: make lint test cover-check
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with: { name: coverage, path: coverage/ }

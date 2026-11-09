@@ -1,0 +1,54 @@
+# Local stack. `docker compose up --build` (or `make up`, which also waits for health checks).
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: buddy
+      POSTGRES_PASSWORD: buddy
+      POSTGRES_DB: buddy
+    ports: ["5432:5432"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U buddy"]
+      interval: 2s
+      retries: 30
+
+  redis:
+    image: redis:8-alpine
+    ports: ["6379:6379"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      retries: 30
+
+  backend:
+    build: ./backend
+    # Every variable has a default, so `docker compose up --build` works from a clean clone without .env.
+    # Compose reads ./.env (if present) only to override these values; never add `env_file: .env` here,
+    # it fails when the file is missing.
+    environment:
+      DATABASE_URL: postgres://buddy:buddy@postgres:5432/buddy?sslmode=disable
+      REDIS_URL: redis://redis:6379/0
+      HTTP_ADDR: ":8080"
+      LLM_PROVIDER: ${LLM_PROVIDER:-fake}
+      LLM_MODEL: ${LLM_MODEL:-claude-opus-5}
+      LLM_TIMEOUT: ${LLM_TIMEOUT:-45s}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      DEMO_INTERN_TOKEN: ${DEMO_INTERN_TOKEN:-intern-demo-token}
+      DEMO_MENTOR_TOKEN: ${DEMO_MENTOR_TOKEN:-mentor-demo-token}
+    ports: ["8080:8080"]
+    depends_on:
+      postgres: { condition: service_healthy }
+      redis: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/healthz"]
+      interval: 3s
+      retries: 30
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_URL: http://localhost:8080 # baked into the static build: explicit API client
+    ports: ["5173:80"]
+    depends_on:
+      backend: { condition: service_healthy }

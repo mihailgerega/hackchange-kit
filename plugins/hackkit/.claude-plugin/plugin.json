@@ -1,0 +1,42 @@
+{
+  "name": "hackkit",
+  "displayName": "Hack&Change Kit",
+  "description": "Hackathon workflow for the Avito AI-buddy case: OpenSpec SDD, grill-first discovery, TDD build loop with subagents, Go/React stack skills, MCP and LLM-agent patterns, specialist reviewers, coverage gate, demo video, deck and a mock jury.",
+  "author": {
+    "name": "Mikhail Gerega"
+  },
+  "license": "MIT",
+  "keywords": [
+    "hackathon",
+    "openspec",
+    "sdd",
+    "tdd",
+    "go",
+    "react",
+    "mcp",
+    "avito"
+  ],
+  "lspServers": {
+    "gopls": {
+      "command": "gopls",
+      "args": [
+        "serve"
+      ],
+      "extensionToLanguage": {
+        ".go": "go"
+      }
+    },
+    "typescript": {
+      "command": "typescript-language-server",
+      "args": [
+        "--stdio"
+      ],
+      "extensionToLanguage": {
+        ".ts": "typescript",
+        ".tsx": "typescriptreact",
+        ".js": "javascript",
+        ".jsx": "javascriptreact"
+      }
+    }
+  }
+}

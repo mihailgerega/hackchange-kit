@@ -1,0 +1,69 @@
+schema: spec-driven
+
+context: |
+  Language: Russian (ru)
+  All artifacts must be written in Russian.
+  Keep OpenSpec structural headings (## ADDED Requirements, ### Requirement:, #### Scenario:, ## Purpose)
+  and the SHALL/MUST keywords in English; requirement and scenario prose is Russian.
+
+  Product: AI-buddy, an AI mentor for interns at Avito (Hack&Change 2026 case).
+  Primary user: intern. Mentor (buddy), team lead and HR BP take part in some scenarios.
+  The assistant answers questions about the team, processes and tools in context, shows onboarding
+  stages, task statuses and next steps, and performs actions through corporate services (mocked).
+
+  Tech stack (must stay compatible with Avito's): backend Go + net/http, PostgreSQL (pgx), Redis;
+  corporate services are mocked as MCP servers (modelcontextprotocol/go-sdk) behind bearer-token auth;
+  LLM behind an agent.Model interface (Anthropic Go SDK by default, LLM_PROVIDER=fake for tests and
+  key-less runs); frontend React + TypeScript + Vite, TanStack Query/Router, Zustand, Zod;
+  tests: go test, Vitest + Testing Library + MSW, Playwright e2e; Docker Compose; GitHub Actions.
+  Existing Avito platform pieces we integrate with rather than rebuild (mock their APIs): employee data,
+  authorization and role model, event analytics (Clickstream/Kafka), AI agent configuration with prompts
+  and MCP (Avito's agent platform "Vitalik": PortalManager + ADK runner, RAG, MCP Hub, benchmarks — the buddy
+  is a domain agent there: system prompt, MCP tools, knowledge base, golden questions, owner), internal AI cron,
+  feature flags (compile-time and runtime; Trisigma is Avito's experiment platform).
+
+  Intern journey (official Avito intern checklist, seeded in data/seed/onboarding-checklist.yaml): week 1 —
+  chats, accesses (Confluence, Jira, team space, Tech-dep channel, stash keys), 1:1s, avito-cli, Sentry;
+  week 2 — team docs, PaaS, Observer, Go docs; month 1 — data protection, SPT, Zero Bug Policy, Grafana;
+  equator meeting after 3 months; graduation; survey. Interns study while working (>= 25 h/week, >= 6 months).
+  The jury are Avito engineers: design follows the Tech Design Review structure of Avito's Playbook.
+
+  Hard constraints from the case:
+  - synthetic or anonymized data only; test instructions are labeled as test data, never presented as Avito policy;
+  - user rights are enforced server-side: unavailable data and operations are neither revealed nor executed;
+  - no scenarios with sensitive personal data or financial operations;
+  - > 80% line coverage of team-written code by automated tests (target 85%);
+  - simple local UI operations < 1 s; LLM/service calls never block the UI (waiting state, timeout, error, retry).
+
+rules:
+  proposal:
+    - Name the intern pain this change removes and how we will measure it (metric + how to check on interns).
+    - State which corporate service is touched and that it is a mock of an existing Avito system.
+    - List what is out of scope.
+  specs:
+    - One capability per spec folder (e.g. buddy-chat, onboarding-plan, timeoff-request, access-request, knowledge-answers).
+    - Every requirement has a happy-path scenario, a permission-denied scenario, and a failure scenario (LLM or service down / timeout).
+    - Specify agent behavior (what the assistant says/does) separately from tool contracts (MCP tool name, input, output, required role, errors).
+    - State-changing tools require explicit user confirmation in the UI before execution — write a scenario for it.
+    - Answers based on knowledge-base documents cite their source; when the answer is unknown the assistant says so and routes to the mentor ("Позвать наставника" with a summary).
+    - MCP tools follow "one tool = one human task": few tools, common parameter names, tolerant input (dates in several formats), compact output, actionable errors.
+    - Every agent run is persisted with status pending -> success | failed; the system prompt never reaches the client.
+    - Prefer observable behavior over implementation; put mechanisms in design.md.
+  design:
+    - Follow Avito's Tech Design Review order - Проблема, Описание, Схема зависимостей, Компромиссы (и техдолг), Альтернативы, FAQ (нагрузка, ресурсы), Структура БД, Информационная безопасность, Метрики.
+    - Include an architecture diagram (Mermaid, C4 level 2), a data/permission flow, and an integration map to Avito platform pieces (agent platform and MCP Hub, auth/roles, AI cron, feature flags, analytics events).
+    - Say where the LLM is needed and what stays deterministic code or cron; how knowledge reaches the model and why; what the system guarantees and what it does not.
+    - Name the LLM provider, model, env var for the key, timeouts and the key-less fallback.
+    - List analytics events emitted for the success metrics.
+  tasks:
+    - Each task is a vertical slice that ends with passing tests; include a test task for every scenario.
+    - Include e2e coverage for the main scenario and a coverage-gate task (make cover-check).
+
+operations:
+  apply:
+    guidance:
+      - Follow hackkit:writing-plans / hackkit:subagent-driven-development and hackkit:test-driven-development.
+      - Run focused tests during the loop and make check before marking the change done.
+  archive:
+    guidance:
+      - Before archiving, confirm make check and make e2e are green and docs/STATUS.md is updated.
