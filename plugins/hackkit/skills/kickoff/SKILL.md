@@ -48,7 +48,7 @@ Use AskUserQuestion, one small batch: Go module path (default from the argument 
 | `github-workflows/ci.yml` | `.github/workflows/ci.yml` | |
 | `claude/settings.json` | `.claude/settings.json` | merge `permissions.allow` if the file exists |
 
-Append to `.gitignore`: `.env`, `coverage/`, `.hackkit/`, `node_modules/`, `frontend/dist/`, `test-results/`, `playwright-report/`.
+Append to `.gitignore`: `.env`, `coverage/`, `.hackkit/`, `.playwright-mcp/`, `node_modules/`, `frontend/dist/`, `test-results/`, `playwright-report/`.
 
 ## 4. OpenSpec
 
